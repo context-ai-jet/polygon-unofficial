@@ -1,4 +1,4 @@
-from polygon import ReferenceClient
+from polygon_unofficial import ReferenceClient
 import asyncio
 
 KEY = "API_KEY"

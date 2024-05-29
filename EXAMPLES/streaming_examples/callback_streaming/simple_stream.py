@@ -1,5 +1,5 @@
-import polygon
-from polygon.enums import StreamCluster
+import polygon_unofficial
+from polygon_unofficial.enums import StreamCluster
 
 
 def my_own_message_handler(ws, msg):
@@ -9,7 +9,7 @@ def my_own_message_handler(ws, msg):
 def main():
     api_key = "YOUR_KEY"
 
-    stream_client = polygon.StreamClient(api_key, StreamCluster.STOCKS, on_message=my_own_message_handler)
+    stream_client = polygon_unofficial.StreamClient(api_key, StreamCluster.STOCKS, on_message=my_own_message_handler)
     stream_client.start_stream_thread()
     stream_client.subscribe_stock_trades(["AMD", "NVDA"])
     stream_client.subscribe_stock_second_aggregates()  # ALL tickers

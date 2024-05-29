@@ -1,9 +1,9 @@
-import polygon
+import polygon_unofficial
 from datetime import date
 
 KEY = "YOUR_API_KEY"  # recommend to keep your key in a separate file and import that here
 
-client = polygon.StocksClient(KEY)
+client = polygon_unofficial.StocksClient(KEY)
 
 # current price for a stock
 current_price = client.get_current_price("AMD")

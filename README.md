@@ -52,11 +52,11 @@ Here are a few quick usage examples.
 ### Getting a Stock's Previous Day OCHLV
 
 ```python
-import polygon
+import polygon_unofficial
 
 api_key = 'YOUR_KEY'
 
-stocks_client = polygon.StocksClient(api_key)
+stocks_client = polygon_unofficial.StocksClient(api_key)
 
 previous_close = stocks_client.get_previous_close('AMD')
 
@@ -66,17 +66,19 @@ print(previous_close)
 ### An Async Example for REST endpoints - Previous Close
 
 ```python
-import polygon
+import polygon_unofficial
 import asyncio
+
 
 async def main():
     api_key = 'YOUR_KEY'
-    
-    stocks_client = polygon.StocksClient(api_key, True)
-    
+
+    stocks_client = polygon_unofficial.StocksClient(api_key, True)
+
     previous_close = await stocks_client.get_previous_close('AMD')
     await stocks_client.close()  # Recommended to close the httpx session when it's not needed. 
     print(previous_close)
+
 
 if __name__ == '__main__':
     asyncio.run(main())
@@ -85,18 +87,21 @@ if __name__ == '__main__':
 ### A Streaming Example (Callback Based)
 
 ```python
-import polygon
-from polygon.enums import StreamCluster
+import polygon_unofficial
+from polygon_unofficial.enums import StreamCluster
+
 
 def my_own_message_handler(ws, msg):
     print(f'msg received: {msg}')
 
+
 def main():
     api_key = 'YOUR_KEY'
 
-    stream_client = polygon.StreamClient(api_key, StreamCluster.STOCKS, on_message=my_own_message_handler)
+    stream_client = polygon_unofficial.StreamClient(api_key, StreamCluster.STOCKS, on_message=my_own_message_handler)
     stream_client.start_stream_thread()
     stream_client.subscribe_stock_trades(['AMD', 'NVDA'])
+
 
 if __name__ == '__main__':
     main()
@@ -105,21 +110,25 @@ if __name__ == '__main__':
 
 ```python
 import asyncio
-import polygon
-from polygon.enums import StreamCluster
+import polygon_unofficial
+from polygon_unofficial.enums import StreamCluster
 
-async def stock_trades_handler(msg):   # it is possible to create one common message handler for different services.
+
+async def stock_trades_handler(msg):  # it is possible to create one common message handler for different services.
     print(f'msg received: {msg}')
-    
+
+
 async def main():
     api_key = 'YOUR_KEY'
-    
-    stream_client = polygon.AsyncStreamClient(api_key, StreamCluster.STOCKS)
-    
+
+    stream_client = polygon_unofficial.AsyncStreamClient(api_key, StreamCluster.STOCKS)
+
     await stream_client.subscribe_stock_trades(['AMD', 'NVDA'], stock_trades_handler)
-    
+
     while 1:
         await stream_client.handle_messages()  # the lib provides auto reconnect functionality. See docs for info
+
+
 if __name__ == '__main__':
     asyncio.run(main())
 

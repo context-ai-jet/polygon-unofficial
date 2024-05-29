@@ -1,4 +1,4 @@
-from polygon import ReferenceClient
+from polygon_unofficial import ReferenceClient
 
 
 KEY = "API_KEY"

@@ -1,13 +1,13 @@
 import asyncio
 from datetime import date
-import polygon
+import polygon_unofficial
 
 
 KEY = "YOUR_API_KEY"  # recommend to keep your key in a separate file and import that here
 
 
 async def main():
-    client = polygon.StocksClient(KEY, True)
+    client = polygon_unofficial.StocksClient(KEY, True)
 
     # current price for a stock
     current_price = await client.get_current_price("AMD")

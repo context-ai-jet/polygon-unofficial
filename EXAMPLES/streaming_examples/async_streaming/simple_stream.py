@@ -1,6 +1,6 @@
 import asyncio
-import polygon
-from polygon.enums import StreamCluster
+import polygon_unofficial
+from polygon_unofficial.enums import StreamCluster
 
 
 async def stock_trades_handler(msg):  # it is possible to create one common message handler for different services.
@@ -14,7 +14,7 @@ async def stock_aggregates_handler(msg):
 async def main():
     api_key = "YOUR_KEY"
 
-    stream_client = polygon.AsyncStreamClient(api_key, StreamCluster.STOCKS)
+    stream_client = polygon_unofficial.AsyncStreamClient(api_key, StreamCluster.STOCKS)
 
     await stream_client.subscribe_stock_trades(handler_function=stock_trades_handler)  # ALL tickers
     await stream_client.subscribe_stock_second_aggregates(["AMD", "NVDA"], stock_aggregates_handler)
